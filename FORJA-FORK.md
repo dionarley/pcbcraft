@@ -16,8 +16,12 @@ do `tools/build.sh`. Compile dentro do submodule, sob demanda:
 
 ```sh
 cd apps/pcbcraft
-cargo build --locked -p pcbcraft -p pcbcraft-cli
+mise exec rust@1.99.1 -- cargo build --locked -p pcbcraft -p pcbcraft-cli
 ```
+
+Não há `rust-toolchain.toml`: o app pede Rust 1.95 ou mais novo. Nesta máquina o
+`rustc` do sistema (1.96.1, NixOS) serve, mas o `mise` já tem 1.99.1 em
+`~/.cargo/bin` e é o mesmo compilador do `fieldcraft` — use ele para os dois.
 
 O agente fala com ele por MCP: `pcbcraft-cli mcp` sobe uma sessão sem janela;
 `pcbcraft-cli mcp --connect <porta> --token-file <arquivo>` se prende ao editor
